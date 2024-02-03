@@ -9,4 +9,4 @@ spec:
     name: certmanager-prod-1-clusterissuer
     kind: ClusterIssuer
   dnsNames:
-    - portainer-prod-1.kube-prod-1.home.birthdayy.de
+    - portainer-prod-1.birthdayy.de

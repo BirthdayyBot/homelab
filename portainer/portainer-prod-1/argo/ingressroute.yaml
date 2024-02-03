@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`portainer-prod-1.kube-prod-1.home.birthdayy.de`)
+    - match: Host(`portainer.birthdayy.de`)
       kind: Rule
       services:
         - name: portainer-prod-1-helm
@@ -17,4 +17,4 @@ spec:
   tls:
     secretName: portainer-prod-1-tls-secret
     domains:
-      - main: portainer-prod-1.kube-prod-1.home.birthdayy.de
+      - main: portainer.birthdayy.de
