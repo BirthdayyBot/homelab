@@ -3,18 +3,20 @@ version: "3"
 networks:
   backend:
     external: true
-
 services:
-  app:
+  agent:
     container_name: portainer-agent-prod-1
-    deploy:
-      mode: global
     image: "portainer/agent:latest"
-    ports:
-      - "9001:9001"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
+    labels:
+      - traefik.enable=true
+      - traefik.tcp.routers.portainer-agent-prod-1.entrypoints=portainer-agent
+      - traefik.tcp.routers.portainer-agent-prod-1.rule=HostSNI(`portainer-agent-prod-1.birthdayy.xyz`)
+      - traefik.tcp.routers.portainer-agent-prod-1.tls=true
+      - traefik.tcp.routers.portainer-agent-prod-1.tls.certresolver=letsencrypt
+      - traefik.tcp.services.portainer-agent-prod-1.loadbalancer.server.port=9001
     networks:
       - backend
-    restart: always
+    restart: unless-stopped
