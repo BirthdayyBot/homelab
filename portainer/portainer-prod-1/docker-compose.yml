@@ -1,0 +1,23 @@
+---
+networks:
+  frontend:
+    external: true
+volumes:
+  portainer_data:
+services:
+  portainer:
+    container_name: portainer-prod-1
+    image: portainer/portainer-ce:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.portainer-prod-1.rule=Host(`portainer.birthdayy.de`)
+      - traefik.http.routers.portainer-prod-1.entrypoints=websecure
+      - traefik.http.routers.portainer-prod-1.tls.certresolver=cloudfare
+      - traefik.http.services.portainer-prod-1.loadbalancer.server.port=9443
+      - traefik.http.services.portainer-prod-1.loadbalancer.server.scheme=https
+    networks:
+      - frontend
