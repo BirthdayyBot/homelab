@@ -20,6 +20,8 @@ entryPoints:
           scheme: https
   websecure:
     address: :443
+  portainer-agent:
+    address: :9001
 
 certificatesResolvers:
   http:
@@ -30,6 +32,17 @@ certificatesResolvers:
       keyType: EC256
       httpChallenge:
         entryPoint: web
+  cloudflare:
+    acme:
+      email: "contact@birthdayy.xyz"
+      storage: /etc/traefik/certs/cloudflare-acme.json
+      caServer: "https://acme-v02.api.letsencrypt.org/directory"
+      keyType: EC256
+      dnsChallenge:
+        provider: cloudflare
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
 
 serversTransport:
   insecureSkipVerify: true
