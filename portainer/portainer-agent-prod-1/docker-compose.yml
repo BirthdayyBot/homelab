@@ -3,9 +3,12 @@ version: "3"
 networks:
   backend:
     external: true
+
 services:
-  agent:
+  app:
     container_name: portainer-agent-prod-1
+    deploy:
+      mode: global
     image: "portainer/agent:latest"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -13,10 +16,11 @@ services:
     labels:
       - traefik.enable=true
       - traefik.tcp.routers.portainer-agent-prod-1.entrypoints=portainer-agent
-      - traefik.tcp.routers.portainer-agent-prod-1.rule=HostSNI(`portainer-agent-prod-1.birthdayy.xyz`)
-      - traefik.tcp.routers.portainer-agent-prod-1.tls=true
-      - traefik.tcp.routers.portainer-agent-prod-1.tls.certresolver=letsencrypt
+      - traefik.tcp.routers.portainer-agent-prod-1.rule=Host(`portainer-agent-prod-1.birthdayy.dev`)
+      - traefik.tcp.routers.portainer-agent-prod-1.tls.certresolver=cloudfare
+      - traefik.tcp.services.portainer-agent-prod-1.middlewares=portainer-agent-prod-1-ipwhitelist
       - traefik.tcp.services.portainer-agent-prod-1.loadbalancer.server.port=9001
+      - traefik.tcp.middlewares.portainer-agent-prod-1-ipwhitelist.ipwhitelist.sourcerange=89.58.28.78
     networks:
       - backend
-    restart: unless-stopped
+    restart: always
