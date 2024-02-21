@@ -18,9 +18,8 @@ services:
       - traefik.tcp.routers.portainer-agent-prod-1.entrypoints=portainer-agent
       - traefik.tcp.routers.portainer-agent-prod-1.rule=HostSNI(`portainer-agent-prod-1.birthdayy.dev`)
       - traefik.tcp.routers.portainer-agent-prod-1.tls.certresolver=cloudfare
-      - traefik.tcp.services.portainer-agent-prod-1.middlewares=portainer-agent-prod-1-ipwhitelist
+      - traefik.tcp.services.portainer-agent-prod-1.middlewares=portainer-agent-prod-1-middleware@file
       - traefik.tcp.services.portainer-agent-prod-1.loadbalancer.server.port=9001
-      - traefik.tcp.middlewares.portainer-agent-prod-1-ipwhitelist.ipwhitelist.sourcerange=89.58.28.78
     networks:
       - backend
     restart: always

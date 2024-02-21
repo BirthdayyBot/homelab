@@ -17,6 +17,7 @@ services:
       - traefik.http.routers.portainer-prod-1.rule=Host(`portainer-prod-1.birthdayy.dev`)
       - traefik.http.routers.portainer-prod-1.entrypoints=websecure
       - traefik.http.routers.portainer-prod-1.tls.certresolver=cloudfare
+      - traefik.http.routers.portainer-prod-1.middlewares=portainer-prod-1-middleware@file
       - traefik.http.services.portainer-prod-1.loadbalancer.server.port=9000
     networks:
       - frontend
