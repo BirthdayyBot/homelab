@@ -6,6 +6,7 @@ networks:
     external: true
 volumes:
   mariadb-data:
+    external: true
 services:
   mariadb:
     container_name: db-prod-1
@@ -14,6 +15,8 @@ services:
       - 3306:3306
     volumes:
       - mariadb-data:/var/lib/mysql
+    environment:
+      - MARIADB_RANDOM_ROOT_PASSWORD=$MARIADB_RANDOM_ROOT_PASSWORD
     networks:
       - frontend
       - backend
