@@ -9,13 +9,13 @@ volumes:
 services:
   passbolt:
     container_name: passbolt-prod-1
-    image: passbolt/passbolt:4.2.0-1-ce
+    image: passbolt/passbolt:4.5.2-1-ce
     environment:
       - APP_FULL_BASE_URL=https://passbolt-prod-1.birthdayy.dev
       - DATASOURCES_DEFAULT_HOST=db-prod-1
       - DATASOURCES_DEFAULT_USERNAME=passbolt-prod-1-user
       - DATASOURCES_DEFAULT_PASSWORD=${DATASOURCES_DEFAULT_PASSWORD}
-      - DATASOURCES_DEFAULT_DATABASE=passbolt_demo_1_db
+      - DATASOURCES_DEFAULT_DATABASE=passbolt_prod_1_db
       - EMAIL_TRANSPORT_DEFAULT_HOST=smtp.mail.me.com
       - EMAIL_TRANSPORT_DEFAULT_PORT=587
       - EMAIL_TRANSPORT_DEFAULT_USERNAME=${EMAIL_TRANSPORT_DEFAULT_USERNAME}
