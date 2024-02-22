@@ -1,6 +1,0 @@
-http:
-  middlewares:
-    portainer-agent-1-middleware:
-      ipWhiteList:
-        sourceRange:
-          - "89.58.28.78"
