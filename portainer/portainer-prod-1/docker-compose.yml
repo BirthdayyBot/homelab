@@ -3,20 +3,20 @@ networks:
   frontend:
     external: true
 volumes:
-  portainer_data:
+  portainer-data:
 services:
   portainer:
     container_name: portainer-prod-1
-    image: portainer/portainer-ce:latest
+    image: portainer/portainer-ee:latest
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
+      - portainer-data:/data
     labels:
       - traefik.enable=true
       - traefik.http.routers.portainer-prod-1.rule=Host(`portainer-prod-1.birthdayy.dev`)
       - traefik.http.routers.portainer-prod-1.entrypoints=websecure
-      - traefik.http.routers.portainer-prod-1.tls.certresolver=cloudfare
+      - traefik.http.routers.portainer-prod-1.tls.certresolver=cloudflare
       - traefik.http.routers.portainer-prod-1.middlewares=portainer-prod-1-middleware@file
       - traefik.http.services.portainer-prod-1.loadbalancer.server.port=9000
     networks:
